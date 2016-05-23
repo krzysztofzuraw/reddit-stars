@@ -39,11 +39,17 @@ class RedditAdapter(object):
             "User-Agent": "RedditAdapter/0.1 by Krzysztof Zuraw"
         }
         response = requests.get(
-            "https://oauth.reddit.com/r/{subreddit}/"
-            "search.json?q={query}&restrict_sr={restrict}".format(
+            ("https://oauth.reddit.com/r/{subreddit}/"
+             "search.json?q={query}&restrict_sr={restrict}").format(
                 subreddit=subreddit,
                 query=query,
                 restrict='on' if subreddit else 'off'
             ),
             headers=headers)
-        return response.json()
+        raw_response = response.json()
+        
+        search_result = []
+        for result in raw_response['data']['children']:
+            search_result.append(result['data']['title'])
+            
+        return search_result

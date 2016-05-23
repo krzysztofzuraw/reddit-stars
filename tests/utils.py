@@ -74,5 +74,8 @@ class FakeRedditAdapter(object):
     def authorize(self):
         return 'oauth2-authorized-key'
 
-    def search(self, query, subreddit=None):
-        return REDDIT_RESPONSE
+    def search(self, query, *args, **kwargs):
+        search_result = []
+        for result in REDDIT_RESPONSE['data']['children']:
+            search_result.append(result['data']['title'])            
+        return search_result

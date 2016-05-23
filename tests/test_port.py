@@ -12,4 +12,4 @@ def reddit_port():
 
 
 def test_reddit_search(reddit_port):
-    assert list(reddit_port.search('test_search')) == ['Post title']
+    assert reddit_port.search('test_search') == ['Post title']
