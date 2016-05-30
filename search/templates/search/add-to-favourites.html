@@ -1,0 +1,16 @@
+<html>
+    <head>
+    </head>
+    <body>
+        <ul>
+            <!-- <form method="post", action="/" class="form" role="form">{% csrf_token %} -->
+                {% for link in search_result %}
+                <li>{{ link }}</li>
+                {% empty %}
+                <li>Please search first</li>
+                {% endfor %}
+                <!-- <input type="submit" class="btn btn-primary" value="Add"> -->
+            <!-- </form> -->
+        </ul>
+    </body>
+</html>
