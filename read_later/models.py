@@ -1,3 +1,6 @@
 from django.db import models
 
-# Create your models here.
+class RedditLink(models.Model):
+    title = models.CharField(max_length=250)
+    url = models.URLField()
+    is_favourite = models.BooleanField(default=False)

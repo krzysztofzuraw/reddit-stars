@@ -2,7 +2,7 @@
     <head>
     </head>
     <body>
-        <form method="post" action="{% url 'add-to-favourites' %}" class="form" role="form">{% csrf_token %}
+        <form method="get" class="form" role="form">
             {{ form }}
             <input type="submit" class="btn btn-primary" value="Search">
         </form>

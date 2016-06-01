@@ -18,7 +18,3 @@ class RedditSearchForm(forms.Form):
         port = ExternalAPIPort(adapter)
         search_result = port.search(self.cleaned_data['query'])
         return search_result
-
-
-class RedditAddToFavouritesForm(forms.Form):
-    is_favourite = forms.BooleanField(label='favourite', initial=False)

@@ -1,26 +1,17 @@
 from django.views.generic.edit import FormView
 from django.http import HttpResponse
 from django.shortcuts import render
-from .forms import RedditSearchForm, RedditAddToFavouritesForm
+from .forms import RedditSearchForm
 
 class RedditSearchView(FormView):
     template_name = 'search/index.html'
     form_class = RedditSearchForm
     success_url = 'add-to-favourites'
 
-    def form_valid(self, form):
-        search_result = form.perform_search()
-        return render(
-            self.request,
-            'search/add-to-favourites.html',
-            {'search_result': search_result}
-        )
-
-
-class RedditAddToFavourites(FormView):
-    template_name = 'search/add-to-favourites.html'
-    form_class = RedditAddToFavouritesForm
-    sucess_url = '/'
-
     def get(self, request, *args, **kwargs):
-        import ipdb; ipdb.set_trace()
+         form = self.form_class(self.request.GET or None)
+         if form.is_valid():
+             search_result = form.perform_search()
+
+    def get_context_data(self, **kwargs):
+        context = super(RedditSearchView, self).get_context_data(**kwargs)
