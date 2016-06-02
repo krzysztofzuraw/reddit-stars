@@ -7,6 +7,7 @@ class RedditSearchView(FormView):
     template_name = 'search/index.html'
     form_class = RedditSearchForm
     success_url = 'add-to-favourites'
+    search_result = None
 
     def get(self, request, *args, **kwargs):
         form = self.form_class(self.request.GET or None)
@@ -14,8 +15,12 @@ class RedditSearchView(FormView):
             self.search_result = form.perform_search()
         return self.render_to_response(self.get_context_data(form=form))
 
-
     def get_context_data(self, **kwargs):
         context = super(RedditSearchView, self).get_context_data(**kwargs)
-        context.update({'search_result': self.search_result, 'sucess': True})
+        if self.search_result:
+            context.update({
+                'search_result': self.search_result,
+                'sucess': True
+                }
+            )
         return context
