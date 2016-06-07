@@ -1,6 +1,8 @@
 import requests
 import requests.auth
 
+from django.conf import settings
+
 
 class RedditAdapter(object):
     def __init__(
@@ -47,9 +49,17 @@ class RedditAdapter(object):
             ),
             headers=headers)
         raw_response = response.json()
-        
+
         search_result = []
         for result in raw_response['data']['children']:
             search_result.append(result['data']['title'])
-            
+
         return search_result
+
+
+instantiated_adapter = RedditAdapter(
+    settings.REDDIT_CLIENT_ID,
+    settings.REDDIT_CLIENT_SECRET,
+    settings.REDDIT_USERNAME,
+    settings.REDDIT_PASSWORD
+)
