@@ -6,7 +6,7 @@ import httpretty
 
 from .utils import REDDIT_RESPONSE
 
-from reddit_stars.reddit_adapter import RedditAdapter
+from external_api.reddit_adapter import RedditAdapter
 
 @httpretty.activate
 def test_reddit_auth():

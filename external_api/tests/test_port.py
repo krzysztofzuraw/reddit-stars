@@ -1,8 +1,8 @@
 import pytest
 
-from tests.utils import FakeRedditAdapter
+from .utils import FakeRedditAdapter
 
-from reddit_stars.external_api_port import ExternalAPIPort
+from external_api.external_api_port import ExternalAPIPort
 
 
 @pytest.fixture(scope='function')

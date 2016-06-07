@@ -2,6 +2,8 @@ from django.views.generic.edit import FormView
 from django.http import HttpResponse
 from django.shortcuts import render
 from .forms import RedditSearchForm
+from read_later.forms import RedditAddToFavouritesForm
+
 
 class RedditSearchView(FormView):
     template_name = 'search/index.html'
@@ -11,9 +13,10 @@ class RedditSearchView(FormView):
 
     def get(self, request, *args, **kwargs):
         form = self.form_class(self.request.GET or None)
+        read_later_form = RedditAddToFavouritesForm()
         if form.is_valid():
             self.search_result = form.perform_search()
-        return self.render_to_response(self.get_context_data(form=form))
+        return self.render_to_response(self.get_context_data(form=form, read_later_form=read_later_form))
 
     def get_context_data(self, **kwargs):
         context = super(RedditSearchView, self).get_context_data(**kwargs)
