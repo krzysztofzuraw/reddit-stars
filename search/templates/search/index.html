@@ -3,13 +3,12 @@
     </head>
     <body>
         {% if sucess %}
-            {% for item in search_result %}
-                <li>{{ item }}</li>
-            {% endfor %}
-        <form method="post" class="form" role="form">
-            {{ read_later_form }}
-            <input type="submit" class="btn btn-primary" value="Search">
-        </form>
+            <form method="post" action="{% url 'add_to_favourites' %}">{% csrf_token %}
+                <table>
+                {{ reddit_links_formset }}
+                </table>
+                <input type="submit" class="btn btn-primary" value="Favourite">
+            </form>
         {% else %}
         <form method="get" class="form" role="form">
             {{ form }}

@@ -21,10 +21,10 @@ from read_later.views import RedditAddToFavourites
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', RedditSearchView.as_view()),
+    url(r'^$', RedditSearchView.as_view(), name='main_page'),
     url(
-        r'^add-to-favourites/',
+        r'^add_to_favourites/',
         RedditAddToFavourites.as_view(),
-        name='add-to-favourites'
+        name='add_to_favourites'
     ),
 ]

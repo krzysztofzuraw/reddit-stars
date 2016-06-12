@@ -1,8 +1,8 @@
 from django import forms
 from .models import RedditLink
 
-
-class RedditAddToFavouritesForm(forms.ModelForm):
-    class Meta:
-        model = RedditLink
-        fields = ['title', 'is_favourite']
+RedditAddToFavouritesFormset = forms.modelformset_factory(
+    RedditLink,
+    fields=('title', 'is_favourite'),
+    extra=5
+)
